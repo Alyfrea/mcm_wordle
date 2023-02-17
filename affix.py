@@ -14,16 +14,18 @@ cnt = {k: Counter() for k in 'abcdefghijklmnopqrstuvwxyz'}
 alls = set()
 
 for word in words:
-    for prev_, next_ in zip(word, word[1]):
+    for prev_, next_ in zip(word, word[1:]):
         cnt[prev_][next_] += 1
         # cnt[next_][prev_] += 1
 
 new_wb = Workbook()
 new_sh = new_wb.active
 new_sh.append(['词缀', '次数'])
-for item in words:
+for item in words[:1]:
     times = 0
-    for prev_, next_ in zip(item, item[1]):
+    for prev_, next_ in zip(item, item[1:]):
+        print(times)
         times += cnt[prev_][next_]
+    print(item, times)
     new_sh.append([item, times])
 new_wb.save('./词缀.xlsx')
