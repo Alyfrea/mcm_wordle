@@ -17,14 +17,11 @@ for word in words:
     for prev_, next_ in zip(word, word[1]):
         cnt[prev_][next_] += 1
         # cnt[next_][prev_] += 1
-        alls.add(prev_ + next_)
-
-alls_sort = sorted(alls, key=lambda s: cnt[s[0]][s[1]], reverse=True)
 
 new_wb = Workbook()
 new_sh = new_wb.active
 new_sh.append(['词缀', '次数'])
-for item in alls_sort:
+for item in words:
     times = 0
     for prev_, next_ in zip(item, item[1]):
         times += cnt[prev_][next_]
