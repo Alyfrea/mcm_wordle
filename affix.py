@@ -21,11 +21,9 @@ for word in words:
 new_wb = Workbook()
 new_sh = new_wb.active
 new_sh.append(['词缀', '次数'])
-for item in words[:1]:
+for item in words:
     times = 0
     for prev_, next_ in zip(item, item[1:]):
-        print(times)
         times += cnt[prev_][next_]
-    print(item, times)
     new_sh.append([item, times])
 new_wb.save('./词缀.xlsx')
