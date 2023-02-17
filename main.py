@@ -1,17 +1,29 @@
-from openpyxl import load_workbook
-import numpy as np
+from openpyxl import load_workbook, Workbook
+from collections import Counter
 
 
 filename = './data_new.xlsx'
 wb = load_workbook(filename)
 sh = wb['Sheet1']
 
-for ln, item in enumerate(sh.iter_rows(min_row=2, max_row=360, min_col=3, max_col=3), 2):
-    item = item[0].value
-    cnt = np.zeros((26,), dtype=int)
-    for c in item:
-        if 'a' <= c <= 'z':
-            cnt[ord(c) - ord('a')] += 1
-    ans = cnt.max()
-    sh.cell(row=ln, column=25, value=ans)
-wb.save(filename)
+words = [item[0].value for item in sh.iter_rows(
+    min_row=2, max_row=360, min_col=3, max_col=3)]
+
+cnt = {k: Counter() for k in 'abcdefghijklmnopqrstuvwxyz'}
+
+alls = set()
+
+for word in words:
+    for prev_, next_ in zip(word, word[1]):
+        cnt[prev_][next_] += 1
+        # cnt[next_][prev_] += 1
+        alls.add(prev_ + next_)
+
+alls_sort = sorted(alls, key=lambda s: cnt[s[0]][s[1]], reverse=True)
+
+new_wb = Workbook()
+new_sh = new_wb.active
+new_sh.append(['词缀', '次数'])
+for item in alls_sort:
+    new_sh.append([item, cnt[item[0]][item[1]]])
+new_wb.save('./词缀.xlsx')
