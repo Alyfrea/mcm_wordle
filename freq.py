@@ -16,5 +16,9 @@ for item in words:
     for c in item:
         if 'a' <= c <= 'z':
             cnt[ord(c) - ord('a')] += 1
-    new_sh.append([item, cnt.max()])
+    ans = 0
+    for i in cnt:
+        if i != 0:
+            ans += 10 ** i
+    new_sh.append([item, ans])
 new_wb.save('重复次数.xlsx')
