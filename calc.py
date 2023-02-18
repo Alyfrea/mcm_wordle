@@ -14,4 +14,4 @@ for ln, item in enumerate(sh.iter_rows(min_col=2, max_col=5, min_row=2, max_row=
     exe = 4.596 - 0.001 * tag1 + 0.348 * tag2 - 0.002 * tag3 - 0.001 * tag4
     exs = 1.027 + 0.003 * tag1 - 0.049 * tag2 + 0.0 * tag3 + 0.001 * tag4
     print(exe, exs)
-    nsh.append([exe, exs])
+    nsh.append([exe, exs]) 
