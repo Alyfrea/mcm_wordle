@@ -24,6 +24,6 @@ new_sh.append(['词缀', '次数'])
 for item in words:
     times = 0
     for prev_, next_ in zip(item, item[1:]):
-        times += cnt[prev_][next_]
+        times += cnt[prev_][next_] ** 2
     new_sh.append([item, times])
 new_wb.save('./词缀.xlsx')
