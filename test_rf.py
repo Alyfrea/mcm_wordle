@@ -8,13 +8,12 @@ import pandas as pd
 import numpy as np
  
 df = pd.read_csv('question2.csv')
-df['DX_bl'].value_counts()
-# y = df['DX_bl'].values
-# x = df.drop(columns=['DX_bl'])
-# x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=.2)
-# rfc = RandomForestClassifier().fit(x_train, y_train)
-# y_pre = rfc.predict(x_test)
-# print(classification_report(y_pre, y_test))
+y = df['ex'].values
+x = df.drop(columns=['ex', 'dx'])
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=.2)
+rfc = RandomForestClassifier().fit(x_train, y_train)
+y_pre = rfc.predict(x_test)
+print(classification_report(y_pre, y_test))
 # importances = rfc.feature_importances_
 # feat_labels = x.columns[::-1]
 # indices = np.argsort(importances)[::-1]
