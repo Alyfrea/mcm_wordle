@@ -1,19 +1,23 @@
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import (classification_report,
-                              auc,
-                              roc_curve)
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.metrics import explained_variance_score
 from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 
 df = pd.read_csv('question2.csv')
+# y = df.drop(columns=['tag1', 'tag2', 'tag3', 'tag4', 'tag5', 'ex_1'])
 y = df['ex'].values
-x = df.drop(columns=['ex', 'dx'])
+x = df.drop(columns=['ex', 'dx', 'ex_1'])
 x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=.2)
-rfc = RandomForestClassifier().fit(x_train, y_train)
+rfc = RandomForestRegressor(n_estimators=100).fit(x_train, y_train)
 y_pre = rfc.predict(x_test)
-print(classification_report(y_pre, y_test))
+# print(explained_variance_score(y_pre, y_test))
+# print(rfc.score(x_test, y_test))
+plt.figure(figsize=(20, 8))
+plt.plot(list(range(y_train.size)), y_train)
+plt.plot([item * 4 for item in range(y_test.size)], y_test)
+plt.savefig('./ans.png')
 # importances = rfc.feature_importances_
 # feat_labels = x.columns[::-1]
 # indices = np.argsort(importances)[::-1]
