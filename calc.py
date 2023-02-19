@@ -22,5 +22,5 @@ for ln, item in enumerate(sh.iter_rows(min_col=2, max_col=5, min_row=2, max_row=
         val2[i] -= val2[i - 1]
     # val /= val.sum()
     # val *= 100
-    nsh.append([exe, exs, *val1])
+    nsh.append([exe, exs, *val1, *val2])
 nwb.save('./question4_res.xlsx')
