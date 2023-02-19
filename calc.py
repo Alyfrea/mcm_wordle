@@ -15,7 +15,7 @@ for ln, item in enumerate(sh.iter_rows(min_col=2, max_col=5, min_row=2, max_row=
     exe = 4.596 - 0.001 * tag1 + 0.348 * tag2 - 0.002 * tag3 - 0.001 * tag4
     exs = 1.027 + 0.003 * tag1 - 0.049 * tag2 + 0.0 * tag3 + 0.001 * tag4
     val = norm.pdf([1, 2, 3, 4, 5, 6, 7], loc=exe, scale=exs)
-    val /= val.sum()
-    val *= 100
+    # val /= val.sum()
+    # val *= 100
     nsh.append([exe, exs, *val])
-nwb.save('./question2_res.xlsx')
+nwb.save('./question3_res.xlsx')
